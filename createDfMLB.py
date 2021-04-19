@@ -7,6 +7,8 @@ import gspread
 from datetime import datetime
 import mlbSecrets
 
+print('Running createDfMLB.py')
+
 # need to get teams
 teams = Teams(year=datevars.season)
 
@@ -27,6 +29,7 @@ for abbr in abbr_list:
     league_df = pd.concat([league_df,team_df])
     
 # calculate ewp
+print('Running EWP calculations.')
 
 league_df['ewp'] = round(((league_df['runs']**mlbvars.exponent)/
 ((league_df['runs']**mlbvars.exponent)+(league_df['runs_against']**mlbvars.exponent))),2)
@@ -41,6 +44,7 @@ league_df['pl_season'] = league_df['pl_season'].apply(lambda x: round(x,mlbvars.
 league_df['ahead/behind'] = league_df['wins'] - league_df['pw']
 
 # calculate differentials
+print('Calculating differentials.')
 
 league_df['runs/g'] = league_df['runs']/league_df['games']
 league_df['runs_against/g'] = league_df['runs_against']/league_df['games']
@@ -53,6 +57,7 @@ league_df = league_df.reindex(sorted(league_df.columns), axis=1)
 
 dateString = datetime.strftime(datetime.now(), '%Y_%m_%d')
 
+print('Uploading resulting dataframe to google sheets.')
 gc = gspread.oauth()
 
 # create the workbook where the day's data will go
