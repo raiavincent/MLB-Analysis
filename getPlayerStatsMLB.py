@@ -110,15 +110,15 @@ currentSeason = currentSeason.loc[:, (currentSeason != 0).any(axis=0)]
 # need to fill NA values as it was causing errors for gspread
 currentSeason.fillna('', inplace=True)
 career_df.fillna('',inplace=True)
-# currentSeason = currentSeason.replace(r'\\n',' ', regex=True)
-# career_df = career_df.replace(r'\\n',' ', regex=True)
+currentSeason = currentSeason.replace(r'\\n',' ', regex=True)
+career_df = career_df.replace(r'\\n',' ', regex=True)
 
 # df1 = df.where((pd.notnull(df)), None)
 currentSeason.where((pd.notnull(currentSeason)), None)
 career_df.where((pd.notnull(career_df)), None)
 
-# currentSeason.replace(np.NaN, '', inplace=True)
-# career_df.replace(np.NaN, '', inplace=True)
+currentSeason.replace(np.NaN, '', inplace=True)
+career_df.replace(np.NaN, '', inplace=True)
 
 dateString = datetime.strftime(datetime.now(), '%Y_%m_%d')
 
