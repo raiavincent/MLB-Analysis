@@ -7,6 +7,7 @@ import gspread
 from mlbSecrets import mlbSeasonFolderId, seasonDashboardURL
 from mlbSecrets import mlbCareerFolderId, careerDashboardURL
 import datevars
+import numpy as np
 
 startTime = datetime.now()
 
@@ -109,6 +110,15 @@ currentSeason = currentSeason.loc[:, (currentSeason != 0).any(axis=0)]
 # need to fill NA values as it was causing errors for gspread
 currentSeason.fillna('', inplace=True)
 career_df.fillna('',inplace=True)
+# currentSeason = currentSeason.replace(r'\\n',' ', regex=True)
+# career_df = career_df.replace(r'\\n',' ', regex=True)
+
+# df1 = df.where((pd.notnull(df)), None)
+currentSeason.where((pd.notnull(currentSeason)), None)
+career_df.where((pd.notnull(career_df)), None)
+
+# currentSeason.replace(np.NaN, '', inplace=True)
+# career_df.replace(np.NaN, '', inplace=True)
 
 dateString = datetime.strftime(datetime.now(), '%Y_%m_%d')
 
@@ -125,8 +135,17 @@ worksheetP = shP.get_worksheet(0)
 worksheetC = shC.get_worksheet(0)
 
 # edit the worksheet with the created dataframe for the day's data
-worksheetP.update([currentSeason.columns.values.tolist()] + currentSeason.values.tolist())
-worksheetC.update([career_df.columns.values.tolist()] + career_df.values.tolist())
+# worksheetP.update([currentSeason.columns.values.tolist()] + currentSeason.values.tolist())
+# worksheetC.update([career_df.columns.values.tolist()] + career_df.values.tolist())
+
+worksheetP.update(
+    [currentSeason.columns.values.tolist()] + [[vv if pd.notnull(vv) else '' for vv in ll] for ll in currentSeason.values.tolist()]
+)
+
+
+worksheetC.update(
+    [career_df.columns.values.tolist()] + [[vv if pd.notnull(vv) else '' for vv in ll] for ll in career_df.values.tolist()]
+)
 
 # open the main workbook with that workbook's url
 dbP = gc.open_by_url(seasonDashboardURL)
