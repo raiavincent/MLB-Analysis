@@ -9,6 +9,7 @@ from mlbSecrets import mlbCareerFolderId, careerDashboardURL
 import datevars
 import schedule
 import time
+import numpy as np
 
 def getstats():
     today = datetime.now()
@@ -115,6 +116,18 @@ def getstats():
         # need to fill NA values as it was causing errors for gspread
         currentSeason.fillna('', inplace=True)
         career_df.fillna('',inplace=True)
+        currentSeason = currentSeason.replace('\n',' ', regex=True)
+        career_df = career_df.replace('\n',' ', regex=True)
+        
+        # df1 = df.where((pd.notnull(df)), None)
+        currentSeason.where((pd.notnull(currentSeason)), None)
+        career_df.where((pd.notnull(career_df)), None)
+        
+        currentSeason.replace(np.NaN, '', inplace=True)
+        career_df.replace(np.NaN, '', inplace=True)
+        
+        currentSeason = currentSeason.astype(str)
+        career_df = career_df.astype(str)
         
         dateString = datetime.strftime(datetime.now(), '%Y_%m_%d')
         
@@ -131,8 +144,16 @@ def getstats():
         worksheetC = shC.get_worksheet(0)
         
         # edit the worksheet with the created dataframe for the day's data
-        worksheetP.update([currentSeason.columns.values.tolist()] + currentSeason.values.tolist())
-        worksheetC.update([career_df.columns.values.tolist()] + career_df.values.tolist())
+        # worksheetP.update([currentSeason.columns.values.tolist()] + currentSeason.values.tolist())
+        # worksheetC.update([career_df.columns.values.tolist()] + career_df.values.tolist())
+        
+        worksheetP.update(
+        [currentSeason.columns.values.tolist()] + [[vv if pd.notnull(vv) else '' for vv in ll] for ll in currentSeason.values.tolist()]
+        )
+
+        worksheetC.update(
+        [career_df.columns.values.tolist()] + [[vv if pd.notnull(vv) else '' for vv in ll] for ll in career_df.values.tolist()]
+        )
         
         # open the main workbook with that workbook's url
         dbP = gc.open_by_url(seasonDashboardURL)
@@ -159,6 +180,51 @@ def getstats():
         # update the sheet in the database workbook with the df
         dbwsP.update([currentSeason.columns.values.tolist()] + currentSeason.values.tolist())
         dbwsC.update([career_df.columns.values.tolist()] + career_df.values.tolist())
+        
+        # unstringify the strung data for SQL purposes
+        spreadsheetIdS = seasonDashboardURL  # Please set the Spreadsheet ID.
+        sheetName = "Data"  # Please set the sheet name.
+        
+        spreadsheetS = gc.open_by_url(spreadsheetIdS)
+        sheetIdS = spreadsheetS.worksheet(sheetName)._properties['sheetId']
+        
+        requestsS = {
+            "requests": [
+                {
+                    "findReplace": {
+                        "sheetId": sheetIdS,
+                        "find": "^'",
+                        "searchByRegex": True,
+                        "includeFormulas": True,
+                        "replacement": ""
+                    }
+                }
+            ]
+        }
+        
+        spreadsheetS.batch_update(requestsS)
+        
+        spreadsheetIdC = careerDashboardURL  # Please set the Spreadsheet ID.
+        sheetName = "Data"  # Please set the sheet name.
+        
+        spreadsheetC = gc.open_by_url(spreadsheetIdC)
+        sheetIdC = spreadsheetC.worksheet(sheetName)._properties['sheetId']
+        
+        requestsC = {
+            "requests": [
+                {
+                    "findReplace": {
+                        "sheetId": sheetIdC,
+                        "find": "^'",
+                        "searchByRegex": True,
+                        "includeFormulas": True,
+                        "replacement": ""
+                    }
+                }
+            ]
+        }
+        
+        spreadsheetC.batch_update(requestsC)
         
         print(datetime.now()-startTime)
     else:
