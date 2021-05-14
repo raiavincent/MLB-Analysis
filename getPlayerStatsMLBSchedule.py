@@ -167,12 +167,12 @@ def getstats():
         
         # below clears the sheet so it can be overwritten with updates
         # z1000 is probably overkill but would rather overkill than underkill
-        range_of_cells = dbwsP.range('A1:Z1000')
+        range_of_cells = dbwsP.range('A1:Z10000')
         for cell in range_of_cells:
             cell.value = ''
         dbwsP.update_cells(range_of_cells)
         
-        range_of_cells = dbwsC.range('A1:Z1000')
+        range_of_cells = dbwsC.range('A1:Z10000')
         for cell in range_of_cells:
             cell.value = ''
         dbwsC.update_cells(range_of_cells)
