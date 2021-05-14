@@ -120,6 +120,9 @@ career_df.where((pd.notnull(career_df)), None)
 currentSeason.replace(np.NaN, '', inplace=True)
 career_df.replace(np.NaN, '', inplace=True)
 
+currentSeason = currentSeason.astype(str)
+career_df = career_df.astype(str)
+
 dateString = datetime.strftime(datetime.now(), '%Y_%m_%d')
 
 # gc authorizes and lets us access the spreadsheets
@@ -172,5 +175,50 @@ dbwsC.update_cells(range_of_cells)
 # update the sheet in the database workbook with the df
 dbwsP.update([currentSeason.columns.values.tolist()] + currentSeason.values.tolist())
 dbwsC.update([career_df.columns.values.tolist()] + career_df.values.tolist())
+
+# unstringify the strung data for SQL purposes
+spreadsheetIdS = seasonDashboardURL  # Please set the Spreadsheet ID.
+sheetName = "Data"  # Please set the sheet name.
+
+spreadsheetS = gc.open_by_url(spreadsheetIdS)
+sheetIdS = spreadsheetS.worksheet(sheetName)._properties['sheetId']
+
+requestsS = {
+    "requests": [
+        {
+            "findReplace": {
+                "sheetId": sheetIdS,
+                "find": "^'",
+                "searchByRegex": True,
+                "includeFormulas": True,
+                "replacement": ""
+            }
+        }
+    ]
+}
+
+spreadsheetS.batch_update(requestsS)
+
+spreadsheetIdC = careerDashboardURL  # Please set the Spreadsheet ID.
+sheetName = "Data"  # Please set the sheet name.
+
+spreadsheetC = gc.open_by_url(spreadsheetIdC)
+sheetIdC = spreadsheetC.worksheet(sheetName)._properties['sheetId']
+
+requestsC = {
+    "requests": [
+        {
+            "findReplace": {
+                "sheetId": sheetIdC,
+                "find": "^'",
+                "searchByRegex": True,
+                "includeFormulas": True,
+                "replacement": ""
+            }
+        }
+    ]
+}
+
+spreadsheetC.batch_update(requestsC)
 
 print(datetime.now()-startTime)
