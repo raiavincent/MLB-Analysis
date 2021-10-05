@@ -6,8 +6,6 @@ import datevars
 import gspread
 from datetime import datetime
 import mlbSecrets
-from sqlalchemy import create_engine
-from sqlalchemy import MetaData
 
 today = datetime.now()
 
@@ -60,21 +58,6 @@ if datevars.start <= today <= datevars.end:
     league_df = league_df.reindex(sorted(league_df.columns), axis=1)
     
     dateString = datetime.strftime(datetime.now(), '%Y_%m_%d')
-
-    engine = create_engine(f'postgresql://postgres:{mlbSecrets.pw}@localhost:5432/season')   
-
-    # Get main table and delete all rows
-    # without deleting the table
-    meta = MetaData(engine)
-    meta.reflect(engine)
-    table = meta.tables['season']
-    del_st = table.delete()
-
-    conn = engine.connect()
-    res = conn.execute(del_st)
-
-    # Insert new data    
-    league_df.to_sql('season', engine, if_exists='append', index=False)
     
     print('Script complete.')
 
