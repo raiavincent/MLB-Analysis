@@ -28,14 +28,21 @@ def pullData():
     dataPbP = statcast(start_dt=start_date, end_dt=todaystr)
     
     dataPbP.index.name = 'id'
+    dataPbP['id'] = dataPbP.index
+    dataPbP = dataPbP.rename(columns={'pitcher.1':'pitcher_1',
+                                'fielder_2.1':'fielder_2_1'})
     
-    list(data.columns)
+    # list(dataPbP.columns)
+    
+    # print(dataPbP.head)
     
     # save as csv for upload/distribution
-    # dataPbP.to_csv('2015 Start PbP.csv')
+    dataPbP.to_csv('2015 Start PbP.csv')
     
-    # pandas_gbq.to_gbq(
-    # dataPbP, table_id, project_id=project_id, if_exists='append')
+    print('Uploading.')
+    
+    pandas_gbq.to_gbq(
+    dataPbP, table_id, project_id=project_id, if_exists='append')
 
 if __name__ == '__main__':
     pullData()
