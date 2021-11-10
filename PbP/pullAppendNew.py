@@ -34,12 +34,12 @@ def pullNewData():
     
     # print(dataPbPYest.dtypes)
     
-    print(list(dataPbPYest.columns))
+    # print(list(dataPbPYest.columns))
     
-    print(dataPbPYest.head)
+    # print(dataPbPYest.head)
     
-    # pandas_gbq.to_gbq(
-    #     dataPbPYest, table_id, project_id=project_id, if_exists='append')
+    pandas_gbq.to_gbq(
+        dataPbPYest, table_id, project_id=project_id, if_exists='append')
     
 if __name__ == '__main__':
     pullNewData()

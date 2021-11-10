@@ -18,7 +18,7 @@ def pullData():
     # get dates necessary for data pulling
     today = datetime.today()
     todaystr = today.strftime('%Y-%m-%d')
-    start_date = '2015-01-01'
+    start_date = '2021-10-08'
     
     # enable cache, helps in case of crashing when pulling large amounts 
     # of data
@@ -37,7 +37,7 @@ def pullData():
     # print(dataPbP.head)
     
     # save as csv for upload/distribution
-    dataPbP.to_csv('2015 Start PbP.csv')
+    # dataPbP.to_csv('2015 Start PbP.csv')
     
     print('Uploading.')
     
