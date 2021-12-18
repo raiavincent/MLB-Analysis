@@ -1,7 +1,7 @@
 # DONE find earliest date of data
 # DONE fix spawn main
-# TODO create table directly from here
-# TODO check and rename column names
+# DONE create table directly from here
+# DONE check and rename column names
 
 import pybaseball
 from pybaseball import statcast
@@ -22,7 +22,7 @@ def pullData():
     pybaseball.cache.enable()
     
     # pulling all data from 2015 seaason through today
-    dataPbP = statcast()
+    dataPbP = statcast(start_dt='2015-01-01', end_dt='2021-12-17')
     
     dataPbP.index.name = 'id'
     dataPbP['id'] = dataPbP.index
@@ -34,10 +34,10 @@ def pullData():
     
     print('Uploading.')
     
-    print(dataPbP)
+    # print(dataPbP)
     
-    # pandas_gbq.to_gbq(
-    # dataPbP, table_id, project_id=project_id, if_exists='append',table_schema=statcast_schema)
+    pandas_gbq.to_gbq(
+    dataPbP, table_id, project_id=project_id, if_exists='append',table_schema=statcast_schema)
 
 if __name__ == '__main__':
     pullData()

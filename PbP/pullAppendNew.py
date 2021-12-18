@@ -31,7 +31,7 @@ def pullNewData():
     dataPbPYest = dataPbPYest.rename(columns={'pitcher.1':'pitcher_1',
                                 'fielder_2.1':'fielder_2_1'})
     
-    dataPbPYest = pd.to_datetime(dataPbPYest['game_date'])
+    # dataPbPYest = pd.to_datetime(dataPbPYest['game_date'])
     
     # dataPbPYest = dataPbPYest.astype({'id':int,
     #               'pitch_type':str,
