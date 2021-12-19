@@ -27,6 +27,8 @@ SELECT
   game_pk,
   at_bat_number pitch_number,
   spin_axis,
+  plate_x,
+  plate_z
   CONCAT(game_pk,at_bat_number,pitch_number) AS pitch_id,
   CONCAT(game_pk,at_bat_number) AS at_bat_id,
   CONCAT(game_pk,inning_topbot,inning) AS inning_id,
