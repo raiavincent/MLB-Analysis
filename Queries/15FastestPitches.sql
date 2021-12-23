@@ -2,6 +2,7 @@ SELECT
     pv.pitcher_full,
     pr.pitch_name,
     pv.release_speed,
+    pv.release_spin_rate,
     pv.plate_x,
     pv.plate_z
 FROM 
