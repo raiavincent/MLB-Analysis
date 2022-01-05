@@ -8,13 +8,10 @@ WITH rawruns AS (SELECT
     SUM((post_bat_score - bat_score)) AS runsScored
 FROM 
     `valuesheet.MLB.hitting_data`
-WHERE
-    (post_bat_score - bat_score) NOT IN (0)
 GROUP BY 
     Inning,
     Inninghalf
-ORDER BY 
-    Inning)
+)
 
 SELECT 
     Inning,
