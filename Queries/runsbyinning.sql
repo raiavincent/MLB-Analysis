@@ -23,4 +23,5 @@ SELECT
 FROM 
     rawruns
 ORDER BY
-    Inning
+    Inning,
+    Inninghalf DESC
