@@ -6,3 +6,4 @@ PbP/2015 Start PbP.csv
 *.pbix
 PbP/creds.py
 Notebooks/index.html
+Notebooks/plotlysecret.py
