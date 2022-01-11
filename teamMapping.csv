@@ -1,0 +1,31 @@
+League,Division,Team,City,Stadium,Capacity,LeagueDiv,TeamID,Abbreviation
+National League,West,Arizona Diamondbacks,"Phoenix, Arizona",Chase Field,48519,National League West,136,ARI
+National League,East,Atlanta Braves,"Cumberland, Georgia",Truist Park,41500,National League East,144,ATL
+American League,East,Baltimore Orioles,"Baltimore, Maryland",Oriole Park at Camden Yards,45971,American League East,110,BAL
+American League,East,Boston Red Sox,"Boston, Massachusetts",Fenway Park,37949,American League East,111,BOS
+National League,Central,Chicago Cubs,"Chicago, Illinois",Wrigley Field,41268,National League Central,112,CHC
+American League,Central,Chicago White Sox,"Chicago, Illinois",Guaranteed Rate Field,40615,American League Central,145,CWS
+National League,Central,Cincinnati Reds,"Cincinnati, Ohio",Great American Ball Park,42319,National League Central,113,CIN
+American League,Central,Cleveland Guardians,"Cleveland, Ohio",Progressive Field,35225,American League Central,114,CLE
+National League,West,Colorado Rockies,"Denver, Colorado",Coors Field,46897,National League West,115,COL
+American League,Central,Detroit Tigers,"Detroit, Michigan",Comerica Park,41297,American League Central,116,DET
+American League,West,Houston Astros,"Houston, Texas",Minute Maid Park,41676,American League West,117,HOU
+American League,Central,Kansas City Royals,"Kansas City, Missouri",Kauffman Stadium,37903,American League Central,118,KC
+American League,West,Los Angeles Angels,"Anaheim, California",Angel Stadium,45957,American League West,108,LAA
+National League,West,Los Angeles Dodgers,"Los Angeles, California",Dodger Stadium,56000,National League West,119,LAD
+National League,East,Miami Marlins,"Miami, Florida",LoanDepot Park,36742,National League East,146,MIA
+National League,Central,Milwaukee Brewers,"Milwaukee, Wisconsin",American Family Field,41900,National League Central,158,MIL
+American League,Central,Minnesota Twins,"Minneapolis, Minnesota",Target Field,38871,American League Central,142,MIN
+National League,East,New York Mets,"New York, New York",Citi Field,41922,National League East,121,NYM
+American League,East,New York Yankees,"New York, New York",Yankee Stadium,47309,American League East,147,NYY
+American League,West,Oakland Athletics,"Oakland, California",Oakland Coliseum,35067,American League West,133,OAK
+National League,East,Philadelphia Phillies,"Philadelphia, Pennsylvania",Citizens Bank Park,43651,National League East,143,PHI
+National League,Central,Pittsburgh Pirates,"Pittsburgh, Pennsylvania",PNC Park,38362,National League Central,134,PIT
+National League,West,San Diego Padres,"San Diego, California",Petco Park,40162,National League West,135,SD
+National League,West,San Francisco Giants,"San Francisco, California",Oracle Park,41915,National League West,137,SF
+American League,West,Seattle Mariners,"Seattle, Washington",T-Mobile Park,47943,American League West,136,SEA
+National League,Central,St. Louis Cardinals,"St. Louis, Missouri",Busch Stadium,43975,National League Central,138,STL
+American League,East,Tampa Bay Rays,"St. Petersburg, Florida",Tropicana Field,31042,American League East,139,TB
+American League,West,Texas Rangers,"Arlington, Texas",Globe Life Field,40300,American League West,140,TEX
+American League,East,Toronto Blue Jays,"Toronto, Ontario",Rogers Centre,49282,American League East,141,TOR
+National League,East,Washington Nationals,"Washington, D.C.",Nationals Park,41313,National League East,120,WSH
