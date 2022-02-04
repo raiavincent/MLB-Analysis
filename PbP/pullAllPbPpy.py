@@ -32,7 +32,7 @@ def pullData():
     # recast date as string to allow for upload to BQ
     dataPbP = dataPbP.astype({'game_date':str})
     
-    dataPbP = dataPbP.drop_duplicates()
+    dataPbP = dataPbP.drop_duplicates() # drop any duplicates to prevent any extra work on sql and pbi end
     
     print('Uploading.')
     
