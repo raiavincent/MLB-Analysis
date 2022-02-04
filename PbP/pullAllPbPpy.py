@@ -32,6 +32,8 @@ def pullData():
     # recast date as string to allow for upload to BQ
     dataPbP = dataPbP.astype({'game_date':str})
     
+    dataPbP = dataPbP.drop_duplicates()
+    
     print('Uploading.')
     
     # print(dataPbP)
