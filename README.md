@@ -5,4 +5,4 @@ My overarching goal is to find trends within this data as to how the game is evo
 
 # Tech Stack
 
-This project makes use of Python, SQL, PowerBI, Pandas, and Bigquery. Data is gathered continuosuly on a Raspberry Pi 4.
+This project makes use of Python, SQL, PowerBI, Pandas, and Bigquery.
